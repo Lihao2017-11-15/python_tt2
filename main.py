@@ -92,6 +92,18 @@ def getcolorlist(x1, y1, x2, y2):
     img.close()
     return sorted(ret)
 
+from ctypes import *  # 获取屏幕上某个坐标的颜色
+ 
+def get_color(x, y):
+    gdi32 = windll.gdi32
+    user32 = windll.user32
+    hdc = user32.GetDC(None)  # 获取颜色值
+    pixel = gdi32.GetPixel(hdc, x, y)  # 提取RGB值
+    r = pixel & 0x0000ff
+    g = (pixel & 0x00ff00) >> 8
+    b = pixel >> 16
+    return [r, g, b]
+
 
 def Ocr(x1, y1, x2, y2):
     x1, y1, x2, y2 = toScreenPos(x1, y1, x2, y2)
@@ -193,7 +205,6 @@ def 找最近的怪():
         hid.keydown("↑")
     time.sleep(abs(y)*0.05)
     hid.keyup()
-
 
 def 自动加buff():
     global 上次加buff时间
