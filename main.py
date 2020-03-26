@@ -1,4 +1,5 @@
 # -*- coding: UTF-8 -*-
+from ctypes import *  # 获取屏幕上某个坐标的颜色
 from inc.ai_qq_apiutil import *
 import inc.ai_qq_apiutil as apiutil
 import json
@@ -92,9 +93,9 @@ def getcolorlist(x1, y1, x2, y2):
     img.close()
     return sorted(ret)
 
-from ctypes import *  # 获取屏幕上某个坐标的颜色
- 
-def get_color(x, y):
+
+def getpixcolor(x, y):
+    x, y = toScreenPos(x, y)
     gdi32 = windll.gdi32
     user32 = windll.user32
     hdc = user32.GetDC(None)  # 获取颜色值
@@ -102,7 +103,7 @@ def get_color(x, y):
     r = pixel & 0x0000ff
     g = (pixel & 0x00ff00) >> 8
     b = pixel >> 16
-    return [r, g, b]
+    return r, g, b
 
 
 def Ocr(x1, y1, x2, y2):
@@ -185,7 +186,7 @@ def 自动拾取():
 
 def 找最近的怪():
     print("找最近的怪...")
-    ret = getcolorlist(1085,34,1286,236)
+    ret = getcolorlist(1085, 34, 1286, 236)
     if len(ret) == 0:
         print("附近没怪？")
         return
@@ -205,6 +206,7 @@ def 找最近的怪():
         hid.keydown("↑")
     time.sleep(abs(y)*0.05)
     hid.keyup()
+
 
 def 自动加buff():
     global 上次加buff时间
@@ -233,6 +235,7 @@ def 自动加buff():
     hid.click_left()
 
     上次加buff时间 = time.time()
+
 
 if __name__ == "__main__":
     print("""
@@ -267,7 +270,7 @@ if __name__ == "__main__":
                 hid.keydown("F2")
                 if not 怪物是否掉血():
                     print("打不到")
-                    # 找最近的怪()
+                    找最近的怪()
                     print("查找怪物中...")
                     hid.keypress("F5")
                     break
@@ -275,12 +278,12 @@ if __name__ == "__main__":
 
         # 自动加buff()
         自动拾取()
-        for _ in range(2): # 按两次，一次有可能按键失败
+        for _ in range(2):  # 按两次，一次有可能按键失败
             hid.keypress("F5")
             if 是否选中怪物():
                 break
-        else: # 如果两次都没找到怪
-            # 找最近的怪()
+        else:  # 如果两次都没找到怪
+            找最近的怪()
             print("查找怪物中...")
             hid.keypress("F5")
 
