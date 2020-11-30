@@ -10,11 +10,11 @@ if __name__ == "__main__":
     win_title = "GitHub Login"
     form = FormControl()
     form.bindWindowByName(None, win_title)
-    form.WindowActive()
     time.sleep(0.5)
 
     while True:
-        form.bindActiveWindow()
+        form.WindowActive()
+        # form.bindActiveWindow()
         time.sleep(1)
         if form is not None:
             if form.getWinTitle() != win_title:
