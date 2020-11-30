@@ -286,5 +286,4 @@ if __name__ == "__main__":
             找最近的怪()
             print("查找怪物中...")
             hid.keypress("F5")
-
     hid.close()
