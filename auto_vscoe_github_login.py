@@ -13,7 +13,7 @@ if __name__ == "__main__":
         form = FormControl()
         form.bindWindowByName(None, win_title)
         form.WindowActive()
-        time.sleep(1)
+        time.sleep(0.5)
         if form is not None:
             if form.getWinTitle() != win_title:
                 continue
