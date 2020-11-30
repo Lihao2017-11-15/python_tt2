@@ -5,6 +5,7 @@ from inc.FormAPI import *
 from inc.kmAPI import *
 import autopy
 import pyautogui as auto
+from inc.change_keyboard_layout import *
 
 if __name__ == "__main__":
     win_title = "GitHub Login"
@@ -20,7 +21,7 @@ if __name__ == "__main__":
             if form.getWinTitle() != win_title:
                 continue
             else:
-                auto.press('shift')
+                change_keyboard(Lan.EN) # 切换为英文输入法
                 auto.typewrite("812256@qq.com")
                 auto.press('tab')
                 auto.typewrite("password")
