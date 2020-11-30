@@ -3,7 +3,7 @@ from ctypes import *  # 获取屏幕上某个坐标的颜色
 from random import *
 from inc.FormAPI import *
 from inc.kmAPI import *
-import autopy, pyperclip
+import autopy
 import pyautogui as auto
 
 if __name__ == "__main__":
@@ -20,9 +20,8 @@ if __name__ == "__main__":
             if form.getWinTitle() != win_title:
                 continue
             else:
-                # auto.typewrite("812256@qq.com")
-                pyperclip.copy("812256@qq.com")
-                pyperclip.paste()
+                auto.press('shift')
+                auto.typewrite("812256@qq.com")
                 auto.press('tab')
                 auto.typewrite("password")
                 auto.press('enter')
