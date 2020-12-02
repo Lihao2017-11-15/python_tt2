@@ -31,7 +31,7 @@ if __name__ == "__main__":
     # https://docs.python.org/zh-cn/dev/library/argparse.html
     import argparse
     parser = argparse.ArgumentParser(description='VS插件GitHub自动登录')
-    parser.add_argument('-u', '--user', default="812256@qq.com", help="帐号")
+    parser.add_argument('-u', '--username', default="812256@qq.com", help="帐号")
     parser.add_argument('-p', '--password', default="", help='密码')
     args = parser.parse_args()
     print(args)
