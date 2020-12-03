@@ -24,6 +24,7 @@ def auto_login(username, password):
                 auto.press('tab')
                 auto.typewrite(password)
                 auto.press('enter')
+                change_keyboard(Lan.ZH)
 
 
 #参数类使用实例
